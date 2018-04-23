@@ -1,3 +1,6 @@
+---
+published: false
+---
 # Today I learned: SPARQL 
 
 Today I learned is going to be a series about new technologies I discover and getting started with. I explain basic concepts and show some example usage of the technology.
@@ -6,7 +9,10 @@ In this first article we are looking at *SPARQL*. The name itself is an abbrevia
 
 The thing to keep in mind for this article is, you would use SPARQL to run queries on an RDF knowledge base. Those knowledge bases are referred to as *ontologies*. In my case, I was given an extract of the publicly availiably *dbpedia* ontology. The extract is centered around Art: Artists, Museums, Paintings, Scultptures and things in relation to them. My goal is to extract information from this ontology using SPARQL.
 
+The tool to perform the job I use is named *Protege*, I can load my ontology into it and it features a SPARQL-Query Editor.
 
+
+## Basic SPARQL concepts
 On the surface, SPARQL looks like an SQL dialect. A sample SPARQL-query may look like this:
 ```
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -34,7 +40,44 @@ The `SELECT` and the `WHERE` very much remind us of standard SQL. But keep in mi
  
  Now with SPARQL the queries are formulated with this subject, predicate, object system in mind. Query-Variables are preceded by a questionmark, so `?subject` and `?object` from the sample SPARQL query above are both query variables. That means the above query would be looking for all subjects that a subclasses of an object.
  
-  
+## More interesting queries
+
+Now that we covered the base, lets do something more interesting then generic queries. As I stated before, I am working with an arts ontology, so lets extract some information related to artists.
+
+### Show the nationality of the Artist Raphael
+
+```
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dbpedia: <http://dbpedia.org/resource/>
+PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+PREFIX dbpprop: <http://dbpedia.org/property/>
+PREFIX yago: <http://dbpedia.org/class/yago/>
+
+
+SELECT ?n 
+WHERE {
+           dbpedia:Raphael dbpedia-owl:nationality ?n . 
+}
+
+----
+
+Result: Italy
+```
+
+
+### Show all information related to Raphael
+
+This very much sounds like `SELECT * from some-ontology where Artist = 'Raphael'`. What does it look like in SPARQL?
+
+```
+SELECT ?p ?o 
+WHERE {
+           dbpedia:Raphael ?p ?o . 
+}
+```
   
 
 [//]: # ![_config.yml]({{ site.baseurl }}/images/config.png)
