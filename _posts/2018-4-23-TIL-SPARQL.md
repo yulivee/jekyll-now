@@ -84,6 +84,8 @@ WHERE {
 }
 ```
   
+In this case we want to retrieve information on our subject so we ask for possible predicates and objects.  
+  
 
 [//]: # ![_config.yml]({{ site.baseurl }}/images/config.png)
 
