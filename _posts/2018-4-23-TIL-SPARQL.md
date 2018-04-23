@@ -1,6 +1,11 @@
 ---
 published: false
 ---
+---
+layout: post
+title: TIL - SPARQL
+---
+
 # Today I learned: SPARQL 
 
 Today I learned is going to be a series about new technologies I discover and getting started with. I explain basic concepts and show some example usage of the technology.
